@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Stack } from "@mui/material";
 import { FC } from "react";
 import EmailInputComponent from "../../../components/inputs/EmailInput";
@@ -8,12 +10,23 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "../authValidator";
 import { SignupCredentials } from "../types/authTypes";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../hooks/useAuth";
+import { useToast } from "@/lib/hooks/useToast";
 
-interface SignupFormProps {
-  handleSubmit: (e: SignupCredentials) => void;
-}
+const SignupForm: FC = () => {
+  const router = useRouter();
 
-const SignupForm: FC<SignupFormProps> = ({ handleSubmit }) => {
+  const { signup } = useAuth();
+  const { openToast } = useToast();
+
+  const handleSubmit = async (data: SignupCredentials) => {
+    const { ok, message } = await signup(data);
+
+    openToast(message, ok ? "success" : "error");
+    ok && router.push("/vaults");
+  };
+
   const {
     handleSubmit: onSubmit,
     formState: { errors },

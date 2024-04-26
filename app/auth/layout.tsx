@@ -1,10 +1,10 @@
 import { Box, Container } from "@mui/material";
 
-interface AuthPageLayoutProps {
+export default function AuthPagesFormLayout({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-const AuthPageFormLayout: React.FC<AuthPageLayoutProps> = ({ children }) => {
+}) {
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -24,6 +24,4 @@ const AuthPageFormLayout: React.FC<AuthPageLayoutProps> = ({ children }) => {
       </Container>
     </>
   );
-};
-
-export default AuthPageFormLayout;
+}

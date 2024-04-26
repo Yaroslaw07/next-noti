@@ -1,3 +1,5 @@
+"use client";
+
 import { Button, Stack } from "@mui/material";
 import React from "react";
 import { FC } from "react";
@@ -8,12 +10,23 @@ import { LoginCredentials } from "../types/authTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../authValidator";
+import { useAuth } from "../hooks/useAuth";
+import { useToast } from "@/lib/hooks/useToast";
+import { useRouter } from "next/navigation";
 
-interface LoginFormProps {
-  handleSubmit: (data: LoginCredentials) => void;
-}
+const LoginForm: FC = () => {
+  const router = useRouter();
 
-const LoginForm: FC<LoginFormProps> = ({ handleSubmit }) => {
+  const { login } = useAuth();
+  const { openToast } = useToast();
+
+  const handleSubmit = async (data: LoginCredentials) => {
+    const { ok, message } = await login(data);
+
+    openToast(message, ok ? "success" : "error");
+    ok && router.push("/vaults");
+  };
+
   const {
     handleSubmit: onSubmit,
     formState: { errors },

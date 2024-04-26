@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, Link, Typography } from "@mui/material";
 import { FC } from "react";
 import { Icons } from "../../../components/Icons";

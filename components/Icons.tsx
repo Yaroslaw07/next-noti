@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CollectionsBookmarkOutlined as CollectionsBookmarkOutlinedIcon,
   VisibilityOutlined as VisibilityOutlinedIcon,

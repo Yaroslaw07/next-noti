@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { authService } from "../services/authService";
 import { LoginCredentials, SignupCredentials } from "../types/authTypes";
 
